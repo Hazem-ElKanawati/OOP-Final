@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 class Contact
 {
@@ -26,15 +27,22 @@ class Contact
 class PhoneBook
 {
     public List<Contact> contacts;
+    public List<Contact> favorites;
+
 
     public PhoneBook()
     {
         contacts = new List<Contact>();
+        favorites = new List<Contact>();
     }
 
     public void AddContact(Contact contact)
     {
         contacts.Add(contact);
+    }
+    public void Addtofav(int index)
+    {
+        favorites.Add(contacts[index]);
     }
 
     public void LoadContactsFromFile(string filename)
@@ -51,6 +59,28 @@ class PhoneBook
                 string phone = parts[2];
                 Contact contact = new Contact(name, email, phone);
                 AddContact(contact);
+            }
+        }
+    }
+
+    public void AddtoFav1(Contact contact)
+    {
+        favorites.Add(contact);
+    }
+    public void LoadFavsfromfile(string filename)
+    {
+
+        string[] lines = File.ReadAllLines(filename);
+        foreach (string line in lines)
+        {
+            string[] parts = line.Split(',');
+            if (parts.Length == 3)
+            {
+                string name = parts[0];
+                string email = parts[1];
+                string phone = parts[2];
+                Contact contact = new Contact(name, email, phone);
+                AddtoFav1(contact);
             }
         }
     }
@@ -73,44 +103,65 @@ class PhoneBook
             }
         }
     }
+
+    public void SavetoFile(string filename)
+    {
+        using (StreamWriter writer = new StreamWriter(filename))
+        {
+            foreach (Contact contact in favorites)
+            {
+                writer.WriteLine(contact.ToString());
+            }
+        }
+    }
     public int[] SearchByName(string name)
     {
         List<int> foundIndexes = new List<int>();
 
-        for (int i = 0; i < contacts.Count; i++)
-        {
-            if (contacts[i].Name.Contains(name) == true)
+      
+            for (int i = 0; i < contacts.Count; i++)
             {
-                foundIndexes.Add(i);
+                if (contacts[i].Name.Contains(name) == true)
+                {
+                    foundIndexes.Add(i);
+                }
             }
-        }
-        return foundIndexes.ToArray();
+            return foundIndexes.ToArray();
+      
+      
     }
     public int[] SearchByEmail(string email)
     {
         List<int> foundIndexes = new List<int>();
 
-        for (int i = 0; i < contacts.Count; i++)
-        {
-            if (contacts[i].Email.Contains(email) == true)
+
+      
+            for (int i = 0; i < contacts.Count; i++)
             {
-                foundIndexes.Add(i);
+                if (contacts[i].Email.Contains(email) == true)
+                {
+                    foundIndexes.Add(i);
+                }
             }
-        }
-        return foundIndexes.ToArray();
+            return foundIndexes.ToArray();
+      
     }
     public int[] SearchByPhone(string number)
     {
         List<int> foundIndexes = new List<int>();
 
-        for (int i = 0; i < contacts.Count; i++)
-        {
-            if (contacts[i].Phone.Contains(number) == true)
+
+       
+       
+            for (int i = 0; i < contacts.Count; i++)
             {
-                foundIndexes.Add(i);
+                if (contacts[i].Phone.Contains(number) == true)
+                {
+                    foundIndexes.Add(i);
+                }
             }
-        }
-        return foundIndexes.ToArray();
+            return foundIndexes.ToArray();
+        
     }
     public bool DeleteContact(int idx)
     {

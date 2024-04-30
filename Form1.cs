@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Diagnostics.Eventing.Reader;
 
 namespace OOP_Final
 {
@@ -26,6 +27,8 @@ namespace OOP_Final
 
             // Load contacts from file
             phoneBook.LoadContactsFromFile("contacts.txt");
+            //loading favorites file
+            phoneBook.LoadFavsfromfile("Favorites.txt");
 
             // Populate the ListView with contacts
         }
@@ -37,8 +40,13 @@ namespace OOP_Final
 
         private void button2_Click(object sender, EventArgs e)
         {
-            int idx = comboBox1.SelectedIndex;
             int[] searchResults = null;
+            int idx = comboBox1.SelectedIndex;
+          
+          
+
+
+            
             switch(idx)
             {
                 case 0 :
@@ -47,7 +55,11 @@ namespace OOP_Final
                     searchResults =  phoneBook.SearchByPhone(textBox1.Text); break;
                 case 2:
                     searchResults = phoneBook.SearchByEmail(textBox1.Text); break;
-
+                default:
+                    MessageBox.Show("Please select a type to search by.");
+                    return;
+                    break;
+                    
             }
             // Clear existing rows in the DataGridView
             dataGridView1.Rows.Clear();
@@ -55,8 +67,12 @@ namespace OOP_Final
             // Add rows corresponding to the search results
             foreach (int index in searchResults)
             {
-                Contact contact = phoneBook.contacts[index];
-                dataGridView1.Rows.Add(contact.Name, contact.Phone, contact.Email);
+               
+                    Contact contact = phoneBook.contacts[index];
+                    dataGridView1.Rows.Add(contact.Name, contact.Phone, contact.Email);
+               
+
+               
             }
         }
 
@@ -162,7 +178,7 @@ namespace OOP_Final
 
         private void button4_Click(object sender, EventArgs e)
         {
-
+            dataGridView1.Rows.Clear();
             dataGridView1.FirstDisplayedScrollingRowIndex = 0;
             try
             {
@@ -182,5 +198,51 @@ namespace OOP_Final
             }
 
         }
+
+        private void button4_Click_1(object sender, EventArgs e)
+        {
+            DataGridViewRow selectedRow1 = dataGridView1.SelectedRows[0];
+
+            // Pass the data of the selected row to another function for further processing
+            string phone = selectedRow1.Cells[1].Value.ToString();
+            int id = phoneBook.GetIndex(phone);
+            phoneBook.Addtofav(id);
+
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            dataGridView1.Rows.Clear();
+            dataGridView1.FirstDisplayedScrollingRowIndex = 0;
+            try
+            {
+
+                for (int i = 0; i < phoneBook.favorites.Count; i++) // Start from 1 to skip header row
+                {
+                    dataGridView1.Rows.Add();
+                    dataGridView1.Rows[i].Cells[0].Value = phoneBook.favorites[i].Name;
+                    dataGridView1.Rows[i].Cells[1].Value = phoneBook.favorites[i].Phone;
+                    dataGridView1.Rows[i].Cells[2].Value = phoneBook.favorites[i].Email;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading data from file: " + ex.Message);
+            }
+        }
+
+        private void searchquery_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int selectedIndex = comboBox2.SelectedIndex;
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            phoneBook.SaveContactsToFile("Contacts.txt");
+            phoneBook.SavetoFile("Favorites.txt");
+        }
     }
+    
 }

@@ -1,0 +1,20 @@
+E:\Programming\C++\Projects\OOP Final\bin\Debug\OOP Final.exe.config
+E:\Programming\C++\Projects\OOP Final\bin\Debug\OOP Final.exe
+E:\Programming\C++\Projects\OOP Final\bin\Debug\OOP Final.pdb
+E:\Programming\C++\Projects\OOP Final\obj\Debug\OOP Final.csproj.AssemblyReference.cache
+E:\Programming\C++\Projects\OOP Final\obj\Debug\OOP_Final.Form1.resources
+E:\Programming\C++\Projects\OOP Final\obj\Debug\OOP_Final.Properties.Resources.resources
+E:\Programming\C++\Projects\OOP Final\obj\Debug\OOP Final.csproj.GenerateResource.cache
+E:\Programming\C++\Projects\OOP Final\obj\Debug\OOP Final.csproj.CoreCompileInputs.cache
+E:\Programming\C++\Projects\OOP Final\obj\Debug\OOP Final.exe
+E:\Programming\C++\Projects\OOP Final\obj\Debug\OOP Final.pdb
+C:\Users\User\Desktop\OOP Final\bin\Debug\OOP Final.exe.config
+C:\Users\User\Desktop\OOP Final\bin\Debug\OOP Final.exe
+C:\Users\User\Desktop\OOP Final\bin\Debug\OOP Final.pdb
+C:\Users\User\Desktop\OOP Final\obj\Debug\OOP Final.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\OOP Final\obj\Debug\OOP_Final.Form1.resources
+C:\Users\User\Desktop\OOP Final\obj\Debug\OOP_Final.Properties.Resources.resources
+C:\Users\User\Desktop\OOP Final\obj\Debug\OOP Final.csproj.GenerateResource.cache
+C:\Users\User\Desktop\OOP Final\obj\Debug\OOP Final.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\OOP Final\obj\Debug\OOP Final.exe
+C:\Users\User\Desktop\OOP Final\obj\Debug\OOP Final.pdb
